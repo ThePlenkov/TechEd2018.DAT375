@@ -1,0 +1,22 @@
+using BusinessPartners;
+
+context MDViews {
+
+    define view BuyerView as
+        select from BusinessPartner
+        {
+            PARTNERID                   as "Id",
+            EMAILADDRESS                as "EmailAddress",
+            COMPANYNAME                 as "CompanyName",
+            ADDRESSES.CITY              as "City",
+            ADDRESSES.POSTALCODE        as "PostalCode",
+            ADDRESSES.STREET            as "Street",
+            ADDRESSES.BUILDING          as "Building",
+            ADDRESSES.COUNTRY           as "Country",
+            ADDRESSES.REGION            as "Region",
+            HISTORY.CREATEDBY.LOGINNAME as "CreatedBy"
+        }
+        where
+            PARTNERROLE = '1';
+            
+}
