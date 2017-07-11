@@ -1,0 +1,6 @@
+  - name: CrossSchemaService
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: TECHED_SCHEMA_SFLIGHT
+    properties:
+      sflight-service-name: '${service-name}'
