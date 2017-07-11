@@ -3,7 +3,7 @@ using BusinessPartners;
 context MDViews {
 
     define view BuyerView as
-        select from BusinessPartner
+        select from BusinessPartners
         {
             PARTNERID                   as "Id",
             EMAILADDRESS                as "EmailAddress",
