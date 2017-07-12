@@ -1,0 +1,12 @@
+modules:
+  - name: web
+    type: html5
+    path: web
+    requires:
+      - name: hbd267-uaa
+      - name: js_api
+        group: destinations
+        properties:
+          name: js_api
+          url: '~{url}'
+          forwardAuthToken: true   
