@@ -9,8 +9,6 @@ PROCEDURE "build_products" (
 BEGIN
 
  DECLARE lv_index int = 0;
- DECLARE lv_del_index int array;
- DECLARE lv_array_index int = 0;
 
  ex_products = select "Product_Id" as PRODUCTID, "Product_Category" as CATEGORY, "Product_Price" as PRICE from "Products";
  :ex_products.INSERT(('ProductA', 'Software', '1999.99'), 1);
