@@ -55,7 +55,7 @@ sap.ui.define([
 				});
 			});
 		},
-		
+
 		callCreate: function(oEvent) {
 			var oTable = this.getView().byId("tblPOHeader");
 			var oModel = oTable.getModel();
@@ -67,9 +67,17 @@ sap.ui.define([
 			oEntry.GROSSAMOUNT = "1137.64";
 			oEntry.NETAMOUNT = "956.00";
 			oEntry.TAXAMOUNT = "181.64";
-			oEntry.QUANTITY = "1.000";
-			oEntry.QUANTITYUNIT = "EA";
 			oEntry.DELIVERYDATE = new Date();
+			oEntry.APPROVALSTATUS =  "I";
+			oEntry.CONFIRMSTATUS = "I";
+			oEntry["HISTORY.CHANGEDAT"] = new Date();
+			oEntry["HISTORY.CHANGEDBY"] = "1";
+			oEntry["HISTORY.CREATEDAT"] = new Date();
+			oEntry["HISTORY.CREATEDBY"] = "1";
+			oEntry.INVOICINGSTATUS = "I";
+			oEntry.LIFECYCLESTATUS = "N";
+			oEntry.NOTEID =	"9000000001";
+			oEntry.ORDERINGSTATUS = "I";
 
 			oModel.setHeaders({
 				"content-type": "application/json;charset=utf-8"
@@ -80,7 +88,7 @@ sap.ui.define([
 			};
 			mParams.error = this.onErrorCall;
 			var mEntity1 = this.getOwnerComponent().getModel().getProperty("/mEntity1");
-			oModel.create("/"+mEntity1, oEntry, mParams);
+			oModel.create("/" + mEntity1, oEntry, mParams);
 		},
 
 		onErrorCall: function(oError) {
