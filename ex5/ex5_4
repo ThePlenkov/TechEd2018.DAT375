@@ -18,8 +18,6 @@
 		data-sap-ui-libs="sap.m,sap.ui.comp,sap.ui.core,sap.ui.layout"
 		data-sap-ui-frameOptions="trusted">
 	</script>
-	<script type="text/javascript" src="/common/error.js" ></script>  
-
 	<script>
 		sap.ui.getCore().attachInit(function () {
 				var ComponentContainer = new sap.ui.core.ComponentContainer({
