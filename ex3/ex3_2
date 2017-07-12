@@ -1,0 +1,11 @@
+  - name: js
+    type: nodejs
+    path: js
+    provides:
+     - name: js_api
+       properties:
+          url: ${default-url}
+    requires:
+     - name: hdi-container
+     - name: hbd267-uaa
+     - name: db
