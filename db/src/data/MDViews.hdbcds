@@ -1,0 +1,28 @@
+using BusinessPartners;
+using Addresses;
+
+context MDViews {
+
+    define view BuyerView as
+        select from BusinessPartners
+        mixin
+        {
+            ADDRESSES : association [ * ] to Addresses on
+                ADDRESSES.ADDRESSID      = BusinessPartners."ADDRESSES.ADDRESSID"; 
+        }
+        into
+        {
+            PARTNERID                   as "Id",
+            EMAILADDRESS                as "EmailAddress",
+            COMPANYNAME                 as "CompanyName",
+            ADDRESSES.CITY              as "City",
+            ADDRESSES.POSTALCODE        as "PostalCode",
+            ADDRESSES.STREET            as "Street",
+            ADDRESSES.BUILDING          as "Building",
+            ADDRESSES.COUNTRY           as "Country",
+            ADDRESSES.REGION            as "Region"
+        }
+        where
+            PARTNERROLE = '1';
+            
+}

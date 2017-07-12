@@ -1,0 +1,17 @@
+{
+  "Addresses": {
+    "target": {
+      "object": "MD.Addresses"
+    }
+  },
+  "BusinessPartners": {
+    "target": {
+      "object": "MD.BusinessPartner"
+    }
+  },
+  "Products": {
+    "target": {
+      "object": "core.models::PRODUCTS"
+    }
+  }
+}
