@@ -1,13 +1,13 @@
-ID: HBD267
+ID: DAT375
 _schema-version: '2.0'
-description: SAP TechEd 2017 HBD267
+description: SAP TechEd 2018 DAT375
 version: 0.0.1
 modules:
   - name: web
     type: html5
     path: web
     requires:
-      - name: hbd267-uaa
+      - name: dat375-uaa
 resources:
-  - name: hbd267-uaa
+  - name: dat375-uaa
     type: com.sap.xs.uaa-space
