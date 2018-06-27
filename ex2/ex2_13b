@@ -1,0 +1,20 @@
+{
+  "Addresses": {
+    "target": {
+      "grantor" : "hdi-central-service",
+      "object" : "MD.Addresses"
+     }
+  },
+    "BusinessPartners": {
+    "target": {
+      "grantor" : "hdi-central-service",
+      "object" : "MD.BusinessPartner"
+     }
+  },
+    "Products": {
+    "target": {
+      "grantor" : "hdi-central-service",
+      "object" : "core.models::PRODUCTS"
+     }
+  } 
+}
