@@ -24,16 +24,17 @@ modules:
       - name: hdi-container
         properties:
           TARGET_CONTAINER: '~{hdi-container-name}'
-#      - name: CrossSchemaService
-#        group: SERVICE_REPLACEMENTS
-#        properties:
-#          key: hdi-sflight-service
-#          service: '~{sflight-service-name}'
-#      - name: CentralDB
-#        group: SERVICE_REPLACEMENTS
-#        properties:
-#          key: hdi-central-service
-#          service: '~{central-db-name}'
+      - name: CrossSchemaService
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: hdi-sflight-service
+          service: '~{sflight-service-name}'
+      - name: CentralDB
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: hdi-central-service
+          service: '~{central-db-name}'
+          
 #  - name: js
 #    type: nodejs
 #    path: js
@@ -67,7 +68,7 @@ resources:
     parameters:
       service-name: TechEd2018CentralDB.teched-2018-cc
     properties:
-      central-db-name: '${service-name}'
+     central-db-name: '${service-name}'
   - name: ui5-lib
     type: org.cloudfoundry.managed-service
     parameters:
