@@ -1,22 +1,22 @@
-ID: HBD267
+ID: DAT375
 _schema-version: '2.0'
-description: SAP TechEd 2017 HBD267
-version: 0.0.1
+description: SAP TechEd 2018 DAT375
+version: 1.0.2018
 modules:
   - name: web
     type: html5
     path: web
     requires:
-      - name: hbd267-uaa
-      - name: js_api
-        group: destinations
-        properties:
-          name: js_api
-          url: '~{url}'
-          forwardAuthToken: true
-      - name: ui5-lib
-        properties:
-          ui5liburl: '~{url}'
+      - name: dat375-uaa
+#      - name: js_api
+#        group: destinations
+#        properties:
+#          name: js_api
+#          url: '~{url}'
+#          forwardAuthToken: true
+#      - name: ui5-lib
+#        properties:
+#          ui5liburl: '~{url}'
   - name: db
     type: hdb
     path: db
@@ -24,34 +24,35 @@ modules:
       - name: hdi-container
         properties:
           TARGET_CONTAINER: '~{hdi-container-name}'
-      - name: CrossSchemaService
-        group: SERVICE_REPLACEMENTS
-        properties:
-          key: hdi-sflight-service
-          service: '~{sflight-service-name}'
-      - name: CentralDB
-        group: SERVICE_REPLACEMENTS
-        properties:
-          key: hdi-central-service
-          service: '~{central-db-name}'
-  - name: js
-    type: nodejs
-    path: js
-    provides:
-      - name: js_api
-        properties:
-          url: '${default-url}'
-    requires:
-      - name: hdi-container
-      - name: hbd267-uaa
-      - name: db
+#      - name: CrossSchemaService
+#        group: SERVICE_REPLACEMENTS
+#        properties:
+#          key: hdi-sflight-service
+#          service: '~{sflight-service-name}'
+#      - name: CentralDB
+#        group: SERVICE_REPLACEMENTS
+#        properties:
+#          key: hdi-central-service
+#          service: '~{central-db-name}'
+#  - name: js
+#    type: nodejs
+#    path: js
+#    provides:
+#      - name: js_api
+#        properties:
+#          url: '${default-url}'
+#    requires:
+#      - name: hdi-container
+#      - name: dat375-uaa
+#      - name: db
+
 resources:
-  - name: hbd267-uaa
+  - name: dat375-uaa
     type: com.sap.xs.uaa-space
   - name: hdi-container
     parameters:
       config:
-        schema: TECHED2017_HBD267
+        schema: TECHED2018_DAT375
     properties:
       hdi-container-name: '${service-name}'
     type: com.sap.xs.hdi-container
@@ -64,11 +65,11 @@ resources:
   - name: CentralDB
     type: org.cloudfoundry.existing-service
     parameters:
-      service-name: teched-2017-container
+      service-name: TechEd2018CentralDB.teched-2018-cc
     properties:
       central-db-name: '${service-name}'
   - name: ui5-lib
-    type: configuration
+    type: org.cloudfoundry.managed-service
     parameters:
-      provider-id: 'com.sap.ui5.dist.sapui5-dist-xsa.XSAC_UI5_FESV3:sapui5_fesv3'
-      version: '>=1.44.0'
+      service: sapui5_sb
+      service-plan: sapui5-1.52
