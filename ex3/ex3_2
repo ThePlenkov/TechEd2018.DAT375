@@ -1,11 +1,11 @@
-  - name: js
+  - name: xsjs
     type: nodejs
-    path: js
+    path: xsjs
     provides:
-     - name: js_api
-       properties:
-          url: ${default-url}
+      - name: xsjs_api
+        properties:
+          url: '${default-url}'
     requires:
-     - name: hdi-container
-     - name: hbd267-uaa
-     - name: db
+      - name: hdi-container
+      - name: dat375-uaa
+      - name: db

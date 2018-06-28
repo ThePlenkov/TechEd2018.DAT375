@@ -3,10 +3,10 @@ modules:
     type: html5
     path: web
     requires:
-      - name: hbd267-uaa
-      - name: js_api
+      - name: dat375-uaa
+      - name: xsjs_api
         group: destinations
         properties:
-          name: js_api
+          name: xsjs_api
           url: '~{url}'
-          forwardAuthToken: true   
+          forwardAuthToken: true 
