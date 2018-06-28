@@ -23,9 +23,9 @@
 			"default": "$XSAPPNAME.Display"
 		}
 
-	},{
+	}, {
 		"source": "(.*)(.xsjs)",
-		"destination": "js_api",
+		"destination": "xsjs_api",
 		"csrfProtection": true,
 		"authenticationType": "xsuaa",
 		"scope": {
@@ -46,7 +46,7 @@
 		}
 	}, {
 		"source": "(.*)(.xsodata)",
-		"destination": "js_api",
+		"destination": "xsjs_api",
 		"authenticationType": "xsuaa",
 		"scope": {
 			"GET": "$XSAPPNAME.Display",
@@ -64,7 +64,7 @@
 			],
 			"default": "$XSAPPNAME.Display"
 		}
-	},{
+	}, {
 		"source": "/(.*)",
 		"localDir": "resources",
 		"authenticationType": "xsuaa",
@@ -76,9 +76,11 @@
 			"pathSuffixes": [
 				"index.html"
 			],
-			"vars": [
-				"ui5liburl"
-			]
+			"services": {
+				"sapui5_sb": {
+					"tag": "ui5"
+				}
+			}
 		}
 	}]
 }

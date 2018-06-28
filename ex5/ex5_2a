@@ -1,0 +1,18 @@
+  - name: web
+    type: html5
+    path: web
+    requires:
+      - name: dat375-uaa
+      - name: dat375-ui5
+      - name: xsjs_api
+        group: destinations
+        properties:
+          name: xsjs_api
+          url: '~{url}'
+          forwardAuthToken: true
+      - name: js_api
+        group: destinations
+        properties:
+          name: js_api
+          url: '~{url}'
+          forwardAuthToken: true
