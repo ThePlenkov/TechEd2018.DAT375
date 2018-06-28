@@ -1,38 +1,30 @@
 {
-  "dependencies": {
-    "@sap/xssec": "1.1.1",
-    "@sap/xsenv": "1.2.7",
-    "@sap/xsjs": "1.14.1",
-    "@sap/hdbext": "4.3.4",
-    "@sap/textbundle": "latest",
-    "@sap/logging": "~3.0",
-    "@sap/audit-logging": "2.0.1",
-    "@sap/cds": "1.14.0",
-    "express": "~4.15",
-    "passport": "~0.3.2",
-    "async": "latest",
-    "ws": "1.1.1",
-    "accept-language-parser": "latest",
-    "node-xlsx": "~0.7.4",
-    "node-zip": "~1.1.1",
-    "xmldoc": "~1.1.0",
-    "winston": "~2.3",
-    "body-parser": "~1.17",
-    "elementtree": "latest"
-  },
-  "description": "Template of Node.js Module that supports both XSJS and pure Node.js (via Express)",
-  "devDependencies": {
-    "@sap/xsjs-test": "2.0.2"
-  },
-  "files": [],
-  "main": "server.js",
-  "name": "js",
-  "scripts": {
-    "start": "node server.js",
-    "test": "node testrun.js"
-  },
-  "engines": {
-    "node": "6.x"
-  },
-  "version": "1.0.0"
+	"dependencies": {
+		"@sap/xssec": "2.1.12",
+		"@sap/xsenv": "1.2.9",
+		"@sap/hdbext": "4.7.2",
+		"@sap/logging": "~3.4",
+		"express": "~4.16",
+		"passport": "~0.4.0",
+		"node-xlsx": "~0.11"		
+	},
+	"devDependencies": {
+		"gulp": "3.9.1",
+		"gulp-replace": "0.5.4",
+		"jasmine-reporters": "2.1.1",
+		"gulp-jasmine": "2.4.1",
+		"gulp-istanbul": "1.1.1"
+	},
+	"files": [],
+	"main": "server.js",
+	"name": "js",
+	"scripts": {
+		"start": "node server.js",
+		"test": "node ./node_modules/gulp/bin/gulp test",
+		"test-coverage": "node ./node_modules/gulp/bin/gulp test-coverage"
+	},
+	"engines": {
+		"node": "8.x"
+	},
+	"version": "1.0.0"
 }
