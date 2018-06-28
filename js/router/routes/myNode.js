@@ -7,7 +7,67 @@ module.exports = function() {
 	var app = express.Router();
 
 	app.get("/", (req, res) => {
-		res.type("text/plain").status(200).send("Hello World Node.js");
+		return res.type("text/plain").status(200).send("Hello World Node.js");
+	});
+
+	app.get("/example1", (req, res) => {
+		var scope = `${req.authInfo.xsappname}.Display`;
+		if (req.authInfo && !req.authInfo.checkScope(scope)) {
+			return res.type("text/plain").status(403).send("Forbidden");
+		}
+
+		let client = req.db;
+		client.prepare(
+			`SELECT SESSION_USER, CURRENT_SCHEMA 
+				             FROM "DUMMY"`,
+			(err, statement) => {
+				if (err) {
+					return res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
+				}
+				statement.exec([],
+					(err, results) => {
+						if (err) {
+							return res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
+						} else {
+							var result = JSON.stringify({
+								Objects: results
+							});
+							return res.type("application/json").status(200).send(result);
+						}
+					});
+				return null;
+			});
+		return null;
+	});
+
+	//Simple Database Call Stored Procedure
+	app.get("/products", (req, res) => {
+		var client = req.db;
+		var hdbext = require("@sap/hdbext");
+		//(client, Schema, Procedure, callback)
+		hdbext.loadProcedure(client, null, "build_products", (err, sp) => {
+			if (err) {
+				return res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
+			}
+			//(Input Parameters, callback(errors, Output Scalar Parameters, [Output Table Parameters])
+			sp({}, (err, parameters, results) => {
+				if (err) {
+					return res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
+				}
+				let out = [];
+				for (let item of results) {
+					out.push([item.PRODUCTID, item.CATEGORY, item.PRICE]);
+				}
+				var excel = require("node-xlsx");
+				var excelOut = excel.build([{
+					name: "Products",
+					data: out
+				}]);
+				res.header("Content-Disposition", "attachment; filename=Excel.xlsx");
+				return res.type("application/vnd.ms-excel").status(200).send(excelOut);
+			});
+			return null;
+		});
 	});
 
 	return app;
