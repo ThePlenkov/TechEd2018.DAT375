@@ -7,7 +7,7 @@ module.exports = function() {
 	var app = express.Router();
 
 	app.get("/", (req, res) => {
-		res.type("text/plain").status(200).send("Hello World Node.js");
+		return res.type("text/plain").status(200).send("Hello World Node.js");
 	});
 
 	return app;
