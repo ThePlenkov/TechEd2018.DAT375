@@ -8,15 +8,12 @@ modules:
     path: web
     requires:
       - name: dat375-uaa
-#      - name: js_api
-#        group: destinations
-#        properties:
-#          name: js_api
-#          url: '~{url}'
-#          forwardAuthToken: true
-#      - name: ui5-lib
-#        properties:
-#          ui5liburl: '~{url}'
+      - name: xsjs_api
+        group: destinations
+        properties:
+          name: xsjs_api
+          url: '~{url}'
+          forwardAuthToken: true
   - name: db
     type: hdb
     path: db
@@ -34,19 +31,17 @@ modules:
         properties:
           key: hdi-central-service
           service: '~{central-db-name}'
-          
-#  - name: js
-#    type: nodejs
-#    path: js
-#    provides:
-#      - name: js_api
-#        properties:
-#          url: '${default-url}'
-#    requires:
-#      - name: hdi-container
-#      - name: dat375-uaa
-#      - name: db
-
+  - name: xsjs
+    type: nodejs
+    path: xsjs
+    provides:
+      - name: xsjs_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: hdi-container
+      - name: dat375-uaa
+      - name: db
 resources:
   - name: dat375-uaa
     type: com.sap.xs.uaa-space
@@ -68,7 +63,7 @@ resources:
     parameters:
       service-name: TechEd2018CentralDB.teched-2018-cc
     properties:
-     central-db-name: '${service-name}'
+      central-db-name: '${service-name}'
   - name: ui5-lib
     type: org.cloudfoundry.managed-service
     parameters:
