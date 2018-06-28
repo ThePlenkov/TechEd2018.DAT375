@@ -8,6 +8,7 @@ modules:
     path: web
     requires:
       - name: dat375-uaa
+      - name: dat375-ui5      
       - name: xsjs_api
         group: destinations
         properties:
@@ -64,7 +65,7 @@ resources:
       service-name: TechEd2018CentralDB.teched-2018-cc
     properties:
       central-db-name: '${service-name}'
-  - name: ui5-lib
+  - name: dat375-ui5
     type: org.cloudfoundry.managed-service
     parameters:
       service: sapui5_sb
