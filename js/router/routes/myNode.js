@@ -96,6 +96,11 @@ module.exports = function() {
 			});
 		return null;
 	});
+
+	//Security Context via Passport
+	app.get("/passport", (req, res) => {
+		res.type("application/json").status(200).send(JSON.stringify(req.authInfo));
+	});
 	
 	return app;
 };
