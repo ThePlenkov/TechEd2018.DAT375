@@ -70,5 +70,32 @@ module.exports = function() {
 		});
 	});
 
+	app.get("/sflightExt", (req, res) => {
+		var scope = `${req.authInfo.xsappname}.Display`;
+		if (req.authInfo && !req.authInfo.checkScope(scope)) {
+			return res.type("text/plain").status(403).send("Forbidden");
+		}
+
+		let client = req.db;
+		client.prepare(
+			`SELECT TOP 100 *   
+			        FROM "FLIGHT.SflightExt"`,
+			(err, statement) => {
+				if (err) {
+					return res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
+				}
+				statement.exec([],
+					(err, results) => {
+						if (err) {
+							return res.type("text/plain").status(500).send(`ERROR: ${err.toString()}`);
+						} else {
+							return res.type("application/json").status(200).send(JSON.stringify(results));
+						}
+					});
+				return null;
+			});
+		return null;
+	});
+	
 	return app;
 };
