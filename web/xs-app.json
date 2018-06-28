@@ -2,6 +2,28 @@
 	"welcomeFile": "index.html",
 	"authenticationMethod": "route",
 	"routes": [{
+		"source": "/node(.*)",
+		"destination": "js_api",
+		"csrfProtection": true,
+		"authenticationType": "xsuaa",
+		"scope": {
+			"GET": "$XSAPPNAME.Display",
+			"POST": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Create"
+			],
+			"PUT": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Create"
+			],
+			"DELETE": [
+				"$XSAPPNAME.Display",
+				"$XSAPPNAME.Delete"
+			],
+			"default": "$XSAPPNAME.Display"
+		}
+
+	}, {
 		"source": "(.*)(.xsjs)",
 		"destination": "xsjs_api",
 		"csrfProtection": true,

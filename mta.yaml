@@ -8,11 +8,17 @@ modules:
     path: web
     requires:
       - name: dat375-uaa
-      - name: dat375-ui5      
+      - name: dat375-ui5
       - name: xsjs_api
         group: destinations
         properties:
           name: xsjs_api
+          url: '~{url}'
+          forwardAuthToken: true
+      - name: js_api
+        group: destinations
+        properties:
+          name: js_api
           url: '~{url}'
           forwardAuthToken: true
   - name: db
@@ -42,6 +48,17 @@ modules:
     requires:
       - name: hdi-container
       - name: dat375-uaa
+      - name: db
+  - name: js
+    type: nodejs
+    path: js
+    provides:
+      - name: js_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: dat375-uaa
+      - name: hdi-container
       - name: db
 resources:
   - name: dat375-uaa
