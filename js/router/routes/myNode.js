@@ -125,13 +125,13 @@ module.exports = function() {
 		var b64string = accessToken;
 		var buf = Buffer.from(b64string, "base64");
 		userInfo.accessTokenDecoded = buf.toString();
-		console.log(JSON.stringify(accessToken));
+
 		let uaa = xsenv.getServices({
 			uaa: {
 				name: global.__remoteUaa
 			}
 		}).uaa;
-		console.log(JSON.stringify(uaa));
+		userInfo.uaa = uaa;
 		xssec.createSecurityContext(accessToken, uaa, function(error, securityContext) {
 			if (error) {
 				console.log("Security Context creation failed");
