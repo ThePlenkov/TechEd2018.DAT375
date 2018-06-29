@@ -147,5 +147,40 @@ module.exports = function() {
 
 	});
 
+	app.get("/info", function(req, res) {
+		let xssec = require("@sap/xssec");
+		let xsenv = require("@sap/xsenv");
+		var info = {};
+		info.port = process.env.PORT;
+		info.host = process.env.HOST;
+
+		function isCloudFoundryPlatform() {
+			try {
+				var oAppInfo = JSON.parse(process.env.VCAP_APPLICATION);
+				return (!!oAppInfo.cf_api);
+			} catch (e) {
+				// Not valid JSON -- assume XSA
+				return false;
+			}
+		}
+		info.isCloudFoundry = isCloudFoundryPlatform();
+	
+		info.applicationName = process.env.VCAP_APPLICATION.application_name;
+	//	info.MTAVersion = process.env.MTA_METADATA.version;
+		info.uris = process.env.VCAP_APPLICATION.uris;
+		info.applicationUris = process.env.VCAP_APPLICATION.application_uris;
+		info.spaceId = process.env.VCAP_APPLICATION.space_id;
+		info.spaceName = process.env.VCAP_APPLICATION.space_name;
+		info.instanceId = process.env.VCAP_APPLICATION.instance_id;
+		info.debug = process.env.NODE_ENV !== "production";
+		info.apiEndPoint = process.env.API_END_POINT;
+		info.caPath = process.env.XS_CACERT_PATH;
+		info.secudir = process.env.SECUDIR;
+		
+		
+		
+		return res.type("application/json").status(200).json(JSON.stringify(info));
+	});
+
 	return app;
 };
