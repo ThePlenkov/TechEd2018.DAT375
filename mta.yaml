@@ -52,17 +52,23 @@ modules:
   - name: js
     type: nodejs
     path: js
+    properties:
+      UAA_SERVICE_NAME: dat375-uaa
+      REMOTE_UAA_NAME: dat260-uaa
     provides:
       - name: js_api
         properties:
           url: '${default-url}'
     requires:
       - name: dat375-uaa
+      - name: dat260-uaa
       - name: hdi-container
       - name: db
 resources:
   - name: dat375-uaa
     type: com.sap.xs.uaa-space
+  - name: dat260-uaa
+    type: org.cloudfoundry.existing-service    
   - name: hdi-container
     parameters:
       config:

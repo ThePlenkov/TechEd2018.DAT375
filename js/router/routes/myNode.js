@@ -101,6 +101,51 @@ module.exports = function() {
 	app.get("/passport", (req, res) => {
 		res.type("application/json").status(200).send(JSON.stringify(req.authInfo));
 	});
-	
+
+	app.get("/env", (req, res) => {
+		return res.type("application/json").status(200).send(JSON.stringify(process.env));
+	});
+
+	app.get("/userinfo", function(req, res) {
+		let xssec = require("@sap/xssec");
+		let xsenv = require("@sap/xsenv");
+		let accessToken;
+		let authWriteScope = false;
+		let authReadScope = false;
+		let controllerAdminScope = true;
+		let userInfo = {
+			"name": req.user.id,
+			"familyName": req.user.name.familyName,
+			"emails": req.user.emails,
+			"scopes": [],
+			"identity-zone": req.authInfo.identityZone
+		};
+		accessToken = require(global.__base + "utils/auth").getAccessToken(req);
+		userInfo.accessToken = accessToken;
+		var b64string = accessToken;
+		var buf = Buffer.from(b64string, "base64");
+		userInfo.accessTokenDecoded = buf.toString();
+		console.log(JSON.stringify(accessToken));
+		let uaa = xsenv.getServices({
+			uaa: {
+				name: global.__remoteUaa
+			}
+		}).uaa;
+		console.log(JSON.stringify(uaa));
+		xssec.createSecurityContext(accessToken, uaa, function(error, securityContext) {
+			if (error) {
+				console.log("Security Context creation failed");
+				return;
+			}
+			console.log("Security Context created successfully");
+			userInfo.scopes = securityContext.scopes;
+			userInfo.securityContext = securityContext;
+			console.log("Scope checked successfully");
+
+		});
+		return res.type("application/json").status(200).json(JSON.stringify(userInfo));
+
+	});
+
 	return app;
 };

@@ -6,6 +6,8 @@ var xsenv = require("@sap/xsenv");
 var port = process.env.PORT || 3000;
 var server = require("http").createServer();
 global.__base = __dirname + "/";
+global.__uaa = process.env.UAA_SERVICE_NAME;
+global.__remoteUaa = process.env.REMOTE_UAA_NAME;
 
 //Initialize Express App for XSA UAA and HDBEXT Middleware
 var passport = require("passport");
@@ -23,7 +25,7 @@ var app = express();
 
 passport.use("JWT", new xssec.JWTStrategy(xsenv.getServices({
 	uaa: {
-		tag: "xsuaa"
+		name: global.__uaa
 	}
 }).uaa));
 app.use(logging.expressMiddleware(appContext));
