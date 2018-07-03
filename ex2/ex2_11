@@ -7,10 +7,10 @@ context FLIGHT {
       mixin
       {
          SBOOKLink : association [ * ] to BOOKINGS on
-            SBOOKLink.MANDT      = FLIGHTTBL.MANDT //$projection.Client
-            and SBOOKLink.CARRID = FLIGHTTBL.CARRID //$projection.CarrierId
-            and SBOOKLink.CONNID = FLIGHTTBL.CONNID //$projection.ConnectionId
-            and SBOOKLink.FLDATE = FLIGHTTBL.FLDATE; //$projection.FlightDate;
+            SBOOKLink.MANDT      = FLIGHTTBL.MANDT 
+            and SBOOKLink.CARRID = FLIGHTTBL.CARRID 
+            and SBOOKLink.CONNID = FLIGHTTBL.CONNID 
+            and SBOOKLink.FLDATE = FLIGHTTBL.FLDATE; 
       }
       into
       {
