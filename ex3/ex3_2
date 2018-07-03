@@ -6,6 +6,6 @@
         properties:
           url: '${default-url}'
     requires:
-      - name: hdi-container
+      - name: hdi_db
       - name: dat375-uaa
       - name: db
